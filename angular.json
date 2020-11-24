@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "course-angular-app-movies"
+    }
+  },
+  "defaultProject": "course-angular-app-movies",
+  "cli": {
+    "analytics": false
+  }
 }
