@@ -19,7 +19,7 @@ export class AuthService {
     }
 
     return this.http.post(
-      `${environment.apiFb}signInWithPassword?key=AIzaSyDLvT5j_hmaLBK2T55_hbLxjg-Bkz7Hnzo`,
+      `${environment.apiFb}signInWithPassword?key=sukey`,
       authData
     );
   }
@@ -32,7 +32,7 @@ export class AuthService {
     }
 
     return this.http.post(
-      `${environment.apiFb}signUp?key=AIzaSyDLvT5j_hmaLBK2T55_hbLxjg-Bkz7Hnzo`,
+      `${environment.apiFb}signUp?key=sukey`,
       authData
     );
   }
