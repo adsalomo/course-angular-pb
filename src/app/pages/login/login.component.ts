@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -51,7 +52,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  signIn() {
+  login() {
     if (this.form.invalid) {
       return Object.values(this.form.controls)
         .forEach(c => {
@@ -60,15 +61,31 @@ export class LoginComponent implements OnInit {
         });
     }
 
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      text: 'Por favor espere...'
+    });
+
+    Swal.showLoading();
+
     console.log(this.form.value);
 
     this.authService.login(this.form.value)
       .subscribe((resp) => {
+        Swal.close();
         console.log(resp);
         localStorage.setItem('token', resp['idToken']);
         this.router.navigateByUrl('home');
       }, (error) => {
+        Swal.close();
         console.log(error);
+        Swal.fire({
+          title: 'Iniciar sesión',
+          allowOutsideClick: false,
+          icon: 'error',
+          text: 'Usuario y/o contraseña incorrecto'
+        });
       });
   }
 

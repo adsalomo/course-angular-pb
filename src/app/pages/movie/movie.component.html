@@ -1,0 +1,121 @@
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-header text-center">
+            <h4>Nueva pelicula</h4>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="formMovie" (ngSubmit)="createMovie()" autocomplete="off">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input formControlName="name" [class.is-invalid]="nameInvalid" class="form-control"
+                                type="text" placeholder="Nombre">
+                            <div class="invalid-feedback">
+                                Nombre debe tener al menos 3 letras
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <input formControlName="description" [class.is-invalid]="descriptionInvalid"
+                                class="form-control" type="text" placeholder="Descripción">
+                            <div class="invalid-feedback">
+                                Imagen debe tener al menos 3 letras
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Imagen URL</label>
+                            <input formControlName="image" [class.is-invalid]="imageInvalid" class="form-control"
+                                type="text" placeholder="Imagen URL">
+                            <div class="invalid-feedback">
+                                Imagen debe tener al menos 3 letras
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Actores</label>
+                            <input formControlName="actors" [class.is-invalid]="actorsInvalid" class="form-control"
+                                type="text" placeholder="Reparto">
+                            <div class="invalid-feedback">
+                                Actores reparto debe tener al menos 3 letras
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Género</label>
+                            <select [disabled]="genders.length === 0" formControlName="genderId"
+                                [class.is-invalid]="genderIdInvalid" class="form-control" type="text">
+                                <option *ngFor="let gender of genders" [value]="gender.id">
+                                    {{gender.name}}
+                                </option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Debe seleccionar un genero
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Fecha de estreno</label>
+                            <input formControlName="releaseDate" [class.is-invalid]="releaseDateInvalid"
+                                class="form-control" type="date">
+                            <div class="invalid-feedback">
+                                Debe seleccionar una fecha
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-5" *ngIf="movies.length > 0">
+        <div class="card-header text-center">
+            <h4>Listado peliculas</h4>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Genero</th>
+                        <th scope="col">Actores</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let movie of movies; let i = index">
+                        <th scope="row">{{i + 1}}</th>
+                        <td>{{movie.name}}</td>
+                        <td>{{movie.description}}</td>
+                        <td>{{movie.genderName}}</td>
+                        <td>{{movie.actors}}</td>
+                        <td>
+                            <button (click)="deleteMovie(movie.id)" type="button" class="btn btn-danger btn-sm">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
